@@ -7,9 +7,10 @@
 
 #![cfg_attr(feature = "cargo-clippy", allow(inline_always))]
 
-use simd_opt;
+use crate::simd_opt;
 
-pub use simdty::{u32x4, u64x4};
+use crate::simdint::{__shuffle_vector4};
+pub use crate::simdty::{u32x4, u64x4};
 
 pub trait Vector4<T>: Copy {
     fn gather(src: &[T], i0: usize, i1: usize, i2: usize, i3: usize) -> Self;
@@ -76,8 +77,8 @@ macro_rules! impl_vector4 {
             #[cfg(feature = "simd")]
             #[inline(always)]
             fn shuffle_left_1(self) -> Self {
-                use simdint::simd_shuffle4;
-                unsafe { simd_shuffle4(self, self, [1, 2, 3, 0]) }
+                //unsafe { simd_shuffle4(self, self, IDX_1) }
+                unsafe { __shuffle_vector4::<{[1, 2, 3, 0]}, _>(self, self) }
             }
 
             #[cfg(not(feature = "simd"))]
@@ -89,8 +90,7 @@ macro_rules! impl_vector4 {
             #[cfg(feature = "simd")]
             #[inline(always)]
             fn shuffle_left_2(self) -> Self {
-                use simdint::simd_shuffle4;
-                unsafe { simd_shuffle4(self, self, [2, 3, 0, 1]) }
+                unsafe { __shuffle_vector4::<{[2, 3, 0, 1]}, _>(self, self) }
             }
 
             #[cfg(not(feature = "simd"))]
@@ -102,8 +102,7 @@ macro_rules! impl_vector4 {
             #[cfg(feature = "simd")]
             #[inline(always)]
             fn shuffle_left_3(self) -> Self {
-                use simdint::simd_shuffle4;
-                unsafe { simd_shuffle4(self, self, [3, 0, 1, 2]) }
+                unsafe { __shuffle_vector4::<{[3, 0, 1, 2]}, _>(self, self) }
             }
 
             #[cfg(not(feature = "simd"))]

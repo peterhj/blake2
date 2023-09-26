@@ -11,7 +11,7 @@
 // https://github.com/rust-lang-nursery/rust-clippy/issues/2453
 #![cfg_attr(feature = "cargo-clippy", allow(empty_line_after_outer_attr))]
 
-use as_bytes::Safe;
+use crate::as_bytes::Safe;
 
 #[cfg(feature = "simd")]
 macro_rules! decl_simd {

@@ -14,7 +14,7 @@
 #![cfg_attr(feature = "cargo-clippy", warn(clippy_pedantic))]
 #![cfg_attr(feature = "cargo-clippy", allow(missing_docs_in_private_items))]
 
-#![cfg_attr(feature = "simd", feature(platform_intrinsics, repr_simd))]
+#![cfg_attr(feature = "simd", feature(platform_intrinsics, repr_simd, adt_const_params))]
 #![cfg_attr(feature = "simd_opt", feature(cfg_target_feature))]
 #![cfg_attr(feature = "simd_asm", feature(asm))]
 
@@ -24,6 +24,9 @@ extern crate std;
 
 extern crate arrayvec;
 extern crate constant_time_eq;
+
+pub use self::blake2b::{Blake2b};
+pub use self::blake2s::{Blake2s};
 
 mod as_bytes;
 mod bytes;
@@ -48,4 +51,4 @@ pub fn selftest() {
 }
 
 // Internal export of selftest_seq for the benches, not part of the crate API.
-pub use blake2::selftest_seq as _selftest_seq;
+pub use self::blake2::selftest_seq as _selftest_seq;

@@ -7,7 +7,7 @@
 
 #![cfg_attr(feature = "cargo-clippy", allow(inline_always))]
 
-use simdty::u32x4;
+use crate::simdty::u32x4;
 
 #[cfg(feature = "simd_opt")]
 #[inline(always)]

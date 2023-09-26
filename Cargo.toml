@@ -1,5 +1,5 @@
 [package]
-name = "blake2-rfc"
+name = "blake2"
 version = "0.2.18"
 authors = ["Cesar Eduardo Barros <cesarb@cesarb.eti.br>"]
 description = "A pure Rust implementation of BLAKE2 based on RFC 7693."
@@ -9,6 +9,7 @@ readme = "README.md"
 keywords = ["blake2", "blake2b", "blake2s", "hash", "crypto"]
 categories = ["cryptography", "no-std"]
 license = "MIT OR Apache-2.0"
+edition = "2018"
 
 [badges]
 travis-ci = { repository = "cesarb/blake2-rfc" }
@@ -21,8 +22,10 @@ simd_asm = ["simd_opt"]
 std = []
 
 [dependencies]
-arrayvec = { version = "0.5.1", default-features = false }
-constant_time_eq = "0.1.0"
+#arrayvec = { version = "0.5.1", default-features = false }
+arrayvec = { path = "../arrayvec", default-features = false }
+#constant_time_eq = "0.1.0"
+constant_time_eq = { path = "../constant_time_eq" }
 
 [dev-dependencies]
 data-encoding = "2.0.0"
